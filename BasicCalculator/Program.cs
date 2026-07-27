@@ -19,7 +19,7 @@ class Calculator
             Console.Write("Enter the second number: ");
             double num2 = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Choose the operation (+, -, *, /): ");
+            Console.Write("Choose the operation (+, -, *, /, %, ^): ");
             string operation = Console.ReadLine();
 
             double result = 0;
@@ -31,7 +31,7 @@ class Calculator
             }
             else if (operation == "-")
             {
-                result -= num1 - num2;
+                result = num1 - num2;
             }
             else if (operation == "*")
             {
@@ -49,24 +49,32 @@ class Calculator
                     result = num1 / num2;
                 }
             }
+            else if (operation == "%")
+            {
+                result = num1 % num2;
+            }
+            else if (operation == "^")
+            {
+                result = Math.Pow(num1, num2);
+            }
             else
             {
                 Console.WriteLine("Invalid Operation!");
+                isThereMistakes = true;
             }
 
             if (!isThereMistakes)
             {
                 Console.WriteLine("Result: " + result);
+                history.Add(num1 + " " + operation + " " + num2 + " = " + result);
             }
-
-            history.Add(num1 + " " + operation + " " + num2 + " = " + result);
 
             Console.WriteLine("Do you want to do another operation? (y/n): ");
 
             anotherOne = Console.ReadLine();
         }
 
-        Console.WriteLine("\n === İşlem Geçmişi ===");
+        Console.WriteLine("\n === Calculation History ===");
         foreach(string record in history)
         {
             Console.WriteLine(record);
